@@ -1,0 +1,89 @@
+<DOCTYPE html>
+
+<html>
+    <Head>
+        <Title> WebBase from Qa Ninja </Title>
+        <script src="js/vue.js"></script>
+    </Head>
+
+    <body>
+        <div id="app">
+            <h1>Cadastro de Alunos</h1>
+
+            <form>
+                <label for="nomeCompleto"> Nome Completo </label>
+                <input name="nomeCompleto" type="text" v-model="form.nome">
+
+                <label for="email">Email</label>
+                <input name="email" type="text" v-model="form.email">
+
+                <label for="nota"> Nota </label>
+                <input name="nota" type text v-model="form.nota">
+
+                <input type="button" value="Cadastrar">
+            </form>
+
+            <span>
+                {{form.nome}} - {{form.email}} - {{form.nota}}
+            </span>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Nota</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="aluno in alunos">
+                            <td> {{aluno.nome }}</td>
+                            <td>{{aluno.email }}</td>
+                            <td>{{aluno.nota }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    form: {
+                        nome: '',
+                        email: '',
+                        nota: ''
+                    },
+
+                    alunos: [
+                        { nome: 'Leonardo Zanela', email: 'leonardo@gmail.com', nota: 10 },
+                        { nome: 'Alessandra', email: 'alessandra@bol.com', nota: 10 },
+                        { nome: 'Etevaldo', email: 'etmanero@uol.com', nota: 5 }
+                    ]
+                }
+            })
+        </script>
+        
+        <style>
+            .table {
+                margin-top: 20px;
+                width: 100%;
+                text-align: left;
+            }
+            .table th,
+            .table td {
+                border-top: 1px solid #ccc
+            }
+            input {
+                display: block;
+            }
+            input[type=button] {
+                background-color: cornflowerblue;
+                border-color: #3f51b5;
+                margin-top: 20px;
+                color: #eee
+            }
+        </style>
+
+    </body>
+
+    </html>
