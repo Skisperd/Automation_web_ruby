@@ -11,21 +11,17 @@
             <h1>Cadastro de Alunos</h1>
 
             <form>
-                <label for="nomeCompleto"> Nome Completo </label>
+                <label for="nomeCompleto">Nome Completo</label>
                 <input name="nomeCompleto" type="text" v-model="form.nome">
 
                 <label for="email">Email</label>
                 <input name="email" type="text" v-model="form.email">
 
-                <label for="nota"> Nota </label>
-                <input name="nota" type text v-model="form.nota">
+                <label for="nota">Nota</label>
+                <input name="nota" type="text" v-model="form.nota">
 
-                <input type="button" value="Cadastrar">
+                <input type="button" value="Cadastrar" @click="addAluno">
             </form>
-
-            <span>
-                {{form.nome}} - {{form.email}} - {{form.nota}}
-            </span>
 
             <div>
                 <table class="table">
@@ -33,17 +29,22 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Nota</th>
+                        <th>Ações</th> 
                     </thead>
                     <tbody>
                         <tr v-for="aluno in alunos">
-                            <td> {{aluno.nome }}</td>
-                            <td>{{aluno.email }}</td>
-                            <td>{{aluno.nota }}</td>
+                            <td> {{aluno.nome}}</td>
+                            <td>{{aluno.email}}</td>
+                            <td>{{aluno.nota}}</td>
+                            <td>
+                                <button class="danger" @click="deleteAluno(aluno)" >Apagar</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        
         <script>
             var app = new Vue({
                 el: "#app",
@@ -53,37 +54,59 @@
                         email: '',
                         nota: ''
                     },
-
-                    alunos: [
-                        { nome: 'Leonardo Zanela', email: 'leonardo@gmail.com', nota: 10 },
-                        { nome: 'Alessandra', email: 'alessandra@bol.com', nota: 10 },
-                        { nome: 'Etevaldo', email: 'etmanero@uol.com', nota: 5 }
-                    ]
+                    alunos: []
+                },
+                methods: {
+                    clearForm: function (){
+                        this.form = {
+                        nome: '',
+                        email: '',
+                        nota: ''
+                        }
+                    },
+                    addAluno: function () {
+                        //console.log(this.form)
+                        this.alunos.push(this.form)
+                        this.clearForm()
+                    },
+                    deleteAluno: function (aluno) {
+                        var teste = this.alunos.indexOf(aluno)
+                        this.alunos.splice(teste, 1)
+                    }
                 }
             })
         </script>
-        
+
         <style>
             .table {
                 margin-top: 20px;
                 width: 100%;
                 text-align: left;
             }
+
             .table th,
             .table td {
                 border-top: 1px solid #ccc
             }
+            .table th:last-child, table td:last-child {
+                text-align: right;
+            }
+            .danger{
+                background-color: #e91e63;
+                border-color: #e91e63;
+                color: #eee;
+            }
             input {
                 display: block;
             }
+
             input[type=button] {
                 background-color: cornflowerblue;
                 border-color: #3f51b5;
                 margin-top: 20px;
-                color: #eee
+                color: #eee;
             }
         </style>
-
     </body>
 
     </html>
