@@ -12,6 +12,7 @@ Funcionalidade: Cadastro
         Quando submeto o meu cadastro completo
         Então sou redirecionado para o Dashboard
 
+    @temp2
     Cenario: Submeter cadastro sem o nome
 
         Dado que acesso a página de cadastro
