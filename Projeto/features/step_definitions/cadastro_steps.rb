@@ -4,11 +4,11 @@ end
 
 Quando('submeto o seguinte formulario de cadastro:') do |table|
     
-    log table.hashes
+    #log table.hashes
 
     user = table.hashes.first
 
-    log user
+    #log user
 
     MongoDB.new.remove_user(user[:email])
 
