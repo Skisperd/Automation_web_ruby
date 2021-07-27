@@ -1,5 +1,3 @@
-
-
 class Alert 
     include Capybara::DSL
 
