@@ -1,4 +1,5 @@
 require "digest/md5"
+
 require_relative "features/support/libs/mongo"
 
 def to_md5(pass)
@@ -6,20 +7,34 @@ def to_md5(pass)
 end
 
 task :test do
-    put "Executando uma tarefa de teste"
+  puts "Executando uma tarefa de teste"
 end
 
 task :local_seeds do
+  CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/config/local.yml"))
 
-    CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/config/local.yml"))
-    users = [
-        { name: "Tiago Dias", email: "tf.dias@gmail.com", password: to_md5("pwd123") },
-        { name: "Tiago Felipe", email: "tf.dias.oliveira@gmail.com", password: to_md5("pwd123") },
-        { name: "Skisperd", email: "skisperd@gmail.com", password: to_md5("pwd123") },
-      ]
-  
-      MongoDB.new.drop_danger
-      MongoDB.new.insert_users(users)
+  users = [
+    { name: "Tiago Felipe Dias", email: "tf.dias@gmail.com", password: to_md5("pwd123") },
+    { name: "Tiago Oliveira", email: "tf.dias@outlook.com", password: to_md5("pwd123") },
+    { name: "Anderson Silva", email: "spider@hotmail.com", password: to_md5("pwd123") },
+    { name: "João Anunciante", email: "joao@anunciante.com", password: to_md5("pwd123") },
+    { name: "Maria Locataria", email: "maria@locataria.com", password: to_md5("pwd123") },
+  ]
 
-      #sh "cucumber"
+  MongoDB.new.drop_danger
+  MongoDB.new.insert_users(users)
+
+  sh "cucumber"
+end
+
+task :hmg_seeds do
+  CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/config/hmg.yml"))
+
+  users = [
+    { name: "Roberto Carlos", email: "betao@yahoo.com", password: to_md5("pwd123") },
+    { name: "Papito Fernando", email: "papito@yahoo.com", password: to_md5("pwd123") },
+  ]
+
+  MongoDB.new.drop_danger
+  MongoDB.new.insert_users(users)
 end

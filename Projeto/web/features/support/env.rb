@@ -7,24 +7,24 @@ CONFIG = YAML.load_file(File.join(Dir.pwd, "features/support/config/#{ENV["CONFI
 
 case ENV["BROWSER"]
 when "firefox"
-    @driver = :selenium
-when "fire_headless"
-    @driver = :selenium_headless
+  @driver = :selenium
 when "chrome"
-    @driver = :selenium_chrome
+  @driver = :selenium_chrome
+when "fire_headless"
+  @driver = :selenium_headless
 when "chrome_headless"
-    @driver = :selenium_chrome_headless
+  @driver = :selenium_chrome_headless
 else
-    raise "Navegador incorreto"
+  raise "Navegador incorreto, variável @driver está vazia :("
 end
 
 Capybara.configure do |config|
-    config.default_driver = @driver
-    config.app_host = CONFIG["url"]
-    config.default_max_wait_time = 15
+  config.default_driver = @driver
+  config.app_host = CONFIG["url"]
+  config.default_max_wait_time = 10
 end
 
 AllureCucumber.configure do |config|
-    config.results_directory = "/logs"
-    config.clean_results_directory = true
+  config.results_directory = "/logs"
+  config.clean_results_directory = true
 end
